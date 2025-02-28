@@ -3,9 +3,11 @@ import {createContext,  useState} from 'react'
 export const AppContext =  createContext(null);
 const AppContextProvider = (props) => {
     const [user, setUser] = useState(null);
+    const [showLogin, setShowLogin] = useState(false);
     const value = {
         user,
-        setUser 
+        setUser ,
+        showLogin, setShowLogin
     }
 
     return (
