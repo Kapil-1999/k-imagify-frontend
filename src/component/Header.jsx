@@ -13,11 +13,11 @@ const Header = () => {
   const navigate = useNavigate();
 
   const onclickHander = () => {
-    if(user) {
-      navigate('/result')
-    } else {
-      setShowLogin(true);
-    }
+    navigate('/result')
+    // if(user) {
+    // } else {
+    //   setShowLogin(true);
+    // }
   };
   return (
     <motion.div

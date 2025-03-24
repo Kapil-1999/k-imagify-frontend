@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { assets } from '../assets/assets';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 const Result = () => {
   const [image, setImage] = useState(assets.sample_img_1);
@@ -10,13 +11,25 @@ const Result = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    // setLoading(true);
-    // setIsImageLoaded(false);
-    // setTimeout(() => {
-    //   setImage(assets.sample_img_2);
-    //   setIsImageLoaded(true);
-    //   setLoading(false);
-    // }, 10000);
+    if (!input.trim()) {
+      setError("Please enter a text.");
+      return;
+    }
+    setLoading(true);
+    setIsImageLoaded(false);
+    try {
+      const response = await axios.post(
+        'http://localhost:4000/generate',
+        { prompt: input }
+      );
+
+      const base64Images = response.data.images;
+      setImage(base64Images);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
